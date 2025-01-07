@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
 import "./globals.css";
+import ConvexClerkProvider from "./providers/ConvexClerkProvider";
+
+const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Audify AI",
@@ -16,7 +20,9 @@ export default function Layout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={manrope.className}>
+        <ConvexClerkProvider>{children}</ConvexClerkProvider>
+      </body>
     </html>
   );
 }
