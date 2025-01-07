@@ -21,14 +21,14 @@ export const getUserById = query({
 // this query is used to get the top user by podcast count. first the podcast is sorted by views and then the user is sorted by total podcasts, so the user with the most podcasts will be at the top.
 export const getTopUserByPodcastCount = query({
   args: {},
-  handler: async (ctx, args) => {
+  handler: async (ctx) => {
     const user = await ctx.db.query("users").collect();
 
     const userData = await Promise.all(
       user.map(async (u) => {
         const podcasts = await ctx.db
           .query("podcasts")
-          .filter((q) => q.eq(q.field("authorId"), u.clerkId))
+          //.filter((q) => q.eq(q.field("authorId"), u.clerkId))
           .collect();
 
         const sortedPodcasts = podcasts.sort((a, b) => b.views - a.views);
@@ -88,7 +88,7 @@ export const updateUser = internalMutation({
 
     const podcast = await ctx.db
       .query("podcasts")
-      .filter((q) => q.eq(q.field("authorId"), args.clerkId))
+      //.filter((q) => q.eq(q.field("authorId"), args.clerkId))
       .collect();
 
     await Promise.all(
