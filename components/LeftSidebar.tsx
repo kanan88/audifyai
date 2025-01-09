@@ -18,7 +18,7 @@ const LeftSidebar = () => {
         >
           <Image src="/icons/logo.svg" alt="logo" width={23} height={27} />
           <h1 className="text-24 font-extrabold text-white max-lg:hidden">
-            Audify
+            Audify AI
           </h1>
         </Link>
 
