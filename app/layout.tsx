@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
@@ -22,6 +23,7 @@ export default function Layout({
     <html lang="en">
       <body className={manrope.className}>
         <ConvexClerkProvider>{children}</ConvexClerkProvider>
+        <Analytics />
       </body>
     </html>
   );
