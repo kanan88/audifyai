@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "resolute-boar-5.convex.cloud",
       },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
+      },
     ],
   },
 };

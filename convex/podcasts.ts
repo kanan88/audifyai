@@ -42,7 +42,7 @@ export const createPodcast = mutation({
       imageUrl: args.imageUrl,
       imageStorageId: args.imageStorageId,
       author: user[0].name,
-      //authorId: user[0].clerkId,
+      authorId: user[0].clerkId,
       voicePrompt: args.voicePrompt,
       imagePrompt: args.imagePrompt,
       voiceType: args.voiceType,
@@ -114,10 +114,10 @@ export const getPodcastByAuthorId = query({
   args: {
     authorId: v.string(),
   },
-  handler: async (ctx /*args*/) => {
+  handler: async (ctx, args) => {
     const podcasts = await ctx.db
       .query("podcasts")
-      //.filter((q) => q.eq(q.field("authorId"), args.authorId))
+      .filter((q) => q.eq(q.field("authorId"), args.authorId))
       .collect();
 
     const totalListeners = podcasts.reduce(
@@ -159,13 +159,12 @@ export const getPodcastBySearch = query({
       return titleSearch;
     }
 
-    // return await ctx.db
-    //   .query("podcasts")
-    //   .withSearchIndex("search_body", (q) =>
-    //     q.search("podcastDescription" || "podcastTitle", args.search)
-    //   )
-    //   .take(10);
-    return [];
+    return await ctx.db
+      .query("podcasts")
+      // .withSearchIndex("search_body", (q) =>
+      //   q.search("podcastDescription" || "podcastTitle", args.search)
+      // )
+      .take(10);
   },
 });
 
