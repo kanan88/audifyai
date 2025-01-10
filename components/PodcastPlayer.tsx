@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -83,6 +84,7 @@ const PodcastPlayer = () => {
       setIsPlaying(true);
     }
   }, [audio]);
+
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
       setDuration(audioRef.current.duration);
@@ -95,11 +97,10 @@ const PodcastPlayer = () => {
 
   return (
     <div
-      className={cn("sticky bottom-0 left-0 flex size-full flex-col", {
+      className={cn("sticky bottom-0 left-0 flex size-full flex-col z-10", {
         hidden: !audio?.audioUrl || audio?.audioUrl === "",
       })}
     >
-      {/* change the color for indicator inside the Progress component in ui folder */}
       <Progress
         value={(currentTime / duration) * 100}
         className="w-full"

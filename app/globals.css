@@ -13,6 +13,9 @@ html {
 }
 
 @layer utilities {
+  .size-full {
+    @apply w-full h-full;
+  }
   .input-class {
     @apply text-16 placeholder:text-16 bg-black-1 rounded-[6px] placeholder:text-gray-1 border-none text-gray-1;
   }
