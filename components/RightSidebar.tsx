@@ -68,7 +68,8 @@ const RightSidebar = () => {
               </figure>
               <div className="flex items-center">
                 <p className="text-12 font-normal text-white-1">
-                  {podcaster.totalPodcasts} podcasts
+                  {podcaster.totalPodcasts} podcast
+                  {podcaster.totalPodcasts > 1 && "s"}
                 </p>
               </div>
             </div>
