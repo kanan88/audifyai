@@ -9,24 +9,20 @@ import Carousel from "./Carousel";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
-//import { useAudio } from "@/providers/AudioProvider";
+import { useAudio } from "@/providers/AudioProvider";
 import { cn } from "@/lib/utils";
-import LoaderSpinner from "./LoaderSpinner";
 
 const RightSidebar = () => {
   const { user } = useUser();
-
   const topPodcasters = useQuery(api.users.getTopUserByPodcastCount);
   const router = useRouter();
 
-  if (!topPodcasters) return <LoaderSpinner />;
-
-  //const { audio } = useAudio();
+  const { audio } = useAudio();
 
   return (
     <section
       className={cn("right_sidebar h-[calc(100vh-5px)]", {
-        "h-[calc(100vh-140px)]": user, //audio?.audioUrl,
+        "h-[calc(100vh-140px)]": audio?.audioUrl,
       })}
     >
       <SignedIn>
@@ -50,8 +46,7 @@ const RightSidebar = () => {
         <Carousel fansLikeDetail={topPodcasters!} />
       </section>
       <section className="flex flex-col gap-8 pt-12">
-        <Header headerTitle="Top Podcasters" />
-
+        <Header headerTitle="Top Podcastrs" />
         <div className="flex flex-col gap-6">
           {topPodcasters?.slice(0, 3).map((podcaster) => (
             <div
@@ -73,8 +68,7 @@ const RightSidebar = () => {
               </figure>
               <div className="flex items-center">
                 <p className="text-12 font-normal text-white-1">
-                  {podcaster.totalPodcasts}{" "}
-                  {podcaster.totalPodcasts > 1 ? "podcasts" : "podcast"}
+                  {podcaster.totalPodcasts} podcasts
                 </p>
               </div>
             </div>

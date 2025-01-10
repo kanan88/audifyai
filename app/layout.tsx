@@ -2,7 +2,8 @@ import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import ConvexClerkProvider from "./providers/ConvexClerkProvider";
+import ConvexClerkProvider from "@/providers/ConvexClerkProvider";
+import AudioProvider from "@/providers/AudioProvider";
 
 const manrope = Manrope({ subsets: ["latin"] });
 
@@ -20,11 +21,15 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={manrope.className}>
-        <ConvexClerkProvider>{children}</ConvexClerkProvider>
-        <Analytics />
-      </body>
-    </html>
+    <ConvexClerkProvider>
+      <html lang="en">
+        <AudioProvider>
+          <body className={`${manrope.className}`}>
+            {children}
+            <Analytics />
+          </body>
+        </AudioProvider>
+      </html>
+    </ConvexClerkProvider>
   );
 }
